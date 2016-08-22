@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Overview &mdash; KGen 0.7.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within KGen 0.7.1 documentation" href="_static/opensearch.xml"/>
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/networkx.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="KGen 0.7.1 documentation" href="index.html"/>
+        <link rel="next" title="Getting-started" href="getting-started.html"/>
+        <link rel="prev" title="KGen documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> KGen
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#kernel">Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#automated-kernel-generation-kgen">Automated Kernel Generation: KGen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#use-cases">Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#limitations-and-future-works">Limitations and Future works</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-next">What Next</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting-started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer/index.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">KGen Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">KGen</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Overview</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>KGen is a Python tool that extracts partial codes out of a large Fortran application and converts them into a standalone/verifiable/executable kernel.</p>
+<div class="section" id="kernel">
+<h2>Kernel<a class="headerlink" href="#kernel" title="Permalink to this headline">¶</a></h2>
+<p>A kernel is a small software that represents a certain characteristic of a larger application. It can be compiled and run generally without using external library on a single computing node. Due to its simple usage, it can greatly improve productivity of various software engineering tasks such as performance optimization, debugging, porting, verification, and so on.</p>
+<p>In addition, a kernel could be an efficient vehcle for enhancing communication between collaborators possibly from various disciplines. For example, a kernel that contains a compiler bug is useful not only for reporting the bug but also for producing and fixing the bug by compiler engineer.</p>
+<p>While a kernel is useful for many software engineering tasks, it is generally hard to create one. Mere copying and pasting an interesting block of code generally does not produce compilable software. In manual kernel extraction, it is common to scan through all source files to find required statements such as variable declaration and importing other modules. Furthermore, preparing state data for driving the execution of a generated kernel is generally harder task. For example, if a structured variable contains a pointer variable of another structured variable, user should manually copy those variables, aka, deep copying.</p>
+<p>Fortunately, most of kernel extraction task from large Fortran application can be automated through static analysis, which is a core function of KGen.</p>
+</div>
+<div class="section" id="automated-kernel-generation-kgen">
+<h2>Automated Kernel Generation: KGen<a class="headerlink" href="#automated-kernel-generation-kgen" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><img alt="_images/workflow.png" src="_images/workflow.png" />
+</div></blockquote>
+<p>KGen is simple to use. First user specifies a block of code in a target Fortran software with Linux commands for clean/build/run the software. Using these information, KGen scans through all the necessary source files and marks statements that are required to make the marked block to be a standalone/executable/verifiable kernel. Current version of KGen extensively uses <a class="reference external" href="https://github.com/pearu/f2py/">F2PY</a>, an excellant Fortran parser written in Python, to generate Abstract Syntax Trees. KGen traverses the ASTs instead of actually reading text source files for collecting analysis information and eventually selects a minimal set of statements for kernel generation.</p>
+<p>KGen also produces input data to drive kernel execution and output data to verify its corrrectness. The data generation supports Fortran derived types that can contain another derived type variables. When KGen-generated kernel is executed, the details of verification result will be automaticaly shown on screen with timing information for performance measurement.</p>
+</div>
+<div class="section" id="use-cases">
+<h2>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h2>
+<p>Original use case that we had in mind when we envisioned this tool was performance optimization of large scientific applications. The application we were optimizing has been being actively developed/used by scientists around the world. To keep the pace of fast chainging code, we have to split a large task with many smaller tasks so that several enginners optimize their part of code parallely. Soon after we have this capability of automated kernel generation, it turned out that we could use this technique for other types of tasks including debugging large applications, verification of simulation result, collaborating with compiler vendors, and creating custom benchmark tests. Several kernels that have been extracted using this tool can be downloaded from <a class="reference external" href="https://github.com/NCAR/kernelOptimization">github.com/NCAR/kernelOptimization</a> github repository.</p>
+</div>
+<div class="section" id="limitations-and-future-works">
+<h2>Limitations and Future works<a class="headerlink" href="#limitations-and-future-works" title="Permalink to this headline">¶</a></h2>
+<p>KGen is still evolving under active development and there are several known limitations in current version.</p>
+<div class="section" id="what-next">
+<h3>What Next<a class="headerlink" href="#what-next" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="tutorial/tutorial.html"><span class="doc">Tutorials</span></a></li>
+<li><a class="reference internal" href="getting-started.html"><span class="doc">Getting-started</span></a></li>
+<li><a class="reference internal" href="examples/index.html"><span class="doc">Examples</span></a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="getting-started.html" class="btn btn-neutral float-right" title="Getting-started" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="KGen documentation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, KGen Developers.
+      Last updated on Aug 22, 2016.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.7.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
