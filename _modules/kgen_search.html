@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kgen_search &mdash; KGen 0.7.1 documentation</title>
+  <title>kgen_search &mdash; KGen 0.7.2 documentation</title>
   
 
   
@@ -19,7 +19,7 @@
   
   
     
-      <link rel="search" type="application/opensearchdescription+xml" title="Search within KGen 0.7.1 documentation" href="../_static/opensearch.xml"/>
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within KGen 0.7.2 documentation" href="../_static/opensearch.xml"/>
     
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="KGen 0.7.1 documentation" href="../index.html"/>
+    <link rel="top" title="KGen 0.7.2 documentation" href="../index.html"/>
         <link rel="up" title="Module code" href="index.html"/> 
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.7.1
+                0.7.2
               </div>
             
           
@@ -146,7 +146,7 @@
 <span class="kn">from</span> <span class="nn">kgen_utils</span> <span class="k">import</span> <span class="n">Config</span><span class="p">,</span> <span class="n">Logger</span><span class="p">,</span> <span class="n">show_tree</span><span class="p">,</span> <span class="n">KGGenType</span>
 <span class="kn">import</span> <span class="nn">Fortran2003</span>
 <span class="kn">from</span> <span class="nn">typedecl_statements</span> <span class="k">import</span> <span class="n">TypeDeclarationStatement</span><span class="p">,</span> <span class="n">TypeStmt</span>
-<span class="kn">from</span> <span class="nn">block_statements</span> <span class="k">import</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeDecl</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Subroutine</span><span class="p">,</span> <span class="n">Interface</span><span class="p">,</span> <span class="n">execution_part</span>
+<span class="kn">from</span> <span class="nn">block_statements</span> <span class="k">import</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeDecl</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Subroutine</span><span class="p">,</span> <span class="n">Interface</span><span class="p">,</span> <span class="n">execution_part</span><span class="p">,</span> <span class="n">Associate</span>
 <span class="kn">from</span> <span class="nn">statements</span> <span class="k">import</span> <span class="n">External</span><span class="p">,</span> <span class="n">Common</span><span class="p">,</span> <span class="n">SpecificBinding</span>
 <span class="kn">from</span> <span class="nn">kgen_extra</span> <span class="k">import</span> <span class="n">Intrinsic_Procedures</span>
 <span class="kn">from</span> <span class="nn">ordereddict</span> <span class="k">import</span> <span class="n">OrderedDict</span>
@@ -156,9 +156,10 @@
 <span class="n">res_typedecl</span> <span class="o">=</span> <span class="p">[</span> <span class="n">TypeDeclarationStatement</span> <span class="p">]</span>
 <span class="n">res_typestmt</span> <span class="o">=</span> <span class="p">[</span> <span class="n">TypeStmt</span> <span class="p">]</span>
 <span class="n">res_derivedtype</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeDecl</span> <span class="p">]</span> 
+<span class="n">res_associate</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Associate</span> <span class="p">]</span> 
 <span class="n">res_kind</span> <span class="o">=</span> <span class="p">[</span> <span class="n">TypeDeclarationStatement</span> <span class="p">]</span> <span class="o">+</span> <span class="n">res_derivedtype</span>
 <span class="n">res_typespec</span> <span class="o">=</span> <span class="p">[</span> <span class="n">TypeDeclarationStatement</span> <span class="p">]</span> <span class="o">+</span> <span class="n">res_derivedtype</span>
-<span class="n">res_value</span> <span class="o">=</span> <span class="p">[</span> <span class="n">TypeDeclarationStatement</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Interface</span> <span class="p">]</span> <span class="o">+</span> <span class="n">res_external</span>
+<span class="n">res_value</span> <span class="o">=</span> <span class="p">[</span> <span class="n">TypeDeclarationStatement</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Interface</span> <span class="p">]</span> <span class="o">+</span> <span class="n">res_external</span> <span class="o">+</span> <span class="n">res_associate</span>
 <span class="n">res_subroutine</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Subroutine</span><span class="p">,</span> <span class="n">Interface</span> <span class="p">]</span> <span class="o">+</span> <span class="n">res_external</span>
 <span class="n">res_function</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Interface</span> <span class="p">]</span> <span class="o">+</span> <span class="n">res_external</span>
 <span class="n">res_subprogram</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Subroutine</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Interface</span> <span class="p">]</span> <span class="o">+</span> <span class="n">res_external</span>
@@ -497,7 +498,10 @@
 
 <div class="viewcode-block" id="search_Comment"><a class="viewcode-back" href="../reference/kgen_search.html#kgen_search.search_Comment">[docs]</a><span class="k">def</span> <span class="nf">search_Comment</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span> 
     <span class="sd">&quot;&quot;&quot; Identifying a name in Comment node&quot;&quot;&quot;</span>
-    <span class="k">pass</span></div>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="s1">&#39;write_state&#39;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">stmt</span><span class="o">.</span><span class="n">write_state</span><span class="p">:</span>
+            <span class="n">f2003obj</span> <span class="o">=</span> <span class="n">Fortran2003</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+            <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">f2003obj</span><span class="p">,</span> <span class="n">res_typedecl</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="search_Nonlabel_Do_Stmt"><a class="viewcode-back" href="../reference/kgen_search.html#kgen_search.search_Nonlabel_Do_Stmt">[docs]</a><span class="k">def</span> <span class="nf">search_Nonlabel_Do_Stmt</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span> 
     <span class="sd">&quot;&quot;&quot; Identifying a name in Nonlabel_Do_Stmt node&quot;&quot;&quot;</span>
@@ -631,10 +635,11 @@
 <div class="viewcode-block" id="search_Call_Stmt"><a class="viewcode-back" href="../reference/kgen_search.html#kgen_search.search_Call_Stmt">[docs]</a><span class="k">def</span> <span class="nf">search_Call_Stmt</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span> 
     <span class="sd">&quot;&quot;&quot; Identifying a name in Call_Stmt node&quot;&quot;&quot;</span>
     <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res_subroutine</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Fortran2003</span><span class="o">.</span><span class="n">Name</span><span class="p">):</span>
-        <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">res_value</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
+    <span class="c1">#if isinstance(node.items[1], Fortran2003.Name):</span>
+    <span class="c1">#    get_name_or_defer(stmt, node.items[1], res_value)</span>
+    <span class="c1">#else:</span>
+    <span class="c1">#    defer(stmt, node.items[1])</span>
+    <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">res_value</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="search_Char_Literal_Constant"><a class="viewcode-back" href="../reference/kgen_search.html#kgen_search.search_Char_Literal_Constant">[docs]</a><span class="k">def</span> <span class="nf">search_Char_Literal_Constant</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span> 
     <span class="sd">&quot;&quot;&quot; Identifying a name in Char_Literal_Constant node&quot;&quot;&quot;</span>
@@ -1288,7 +1293,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, KGen Developers.
-      Last updated on Aug 22, 2016.
+      Last updated on Dec 27, 2016.
 
     </p>
   </div>
@@ -1310,7 +1315,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.7.1',
+            VERSION:'0.7.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  false

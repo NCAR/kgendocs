@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>User Guide &mdash; KGen 0.7.1 documentation</title>
+  <title>User Guide &mdash; KGen 0.7.2 documentation</title>
   
 
   
@@ -19,7 +19,7 @@
   
   
     
-      <link rel="search" type="application/opensearchdescription+xml" title="Search within KGen 0.7.1 documentation" href="_static/opensearch.xml"/>
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within KGen 0.7.2 documentation" href="_static/opensearch.xml"/>
     
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="KGen 0.7.1 documentation" href="index.html"/>
+    <link rel="top" title="KGen 0.7.2 documentation" href="index.html"/>
         <link rel="next" title="Developer Guide" href="developer/index.html"/>
         <link rel="prev" title="Specifying a kernel region" href="tutorial/tutorial.html"/> 
 
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.7.1
+                0.7.2
               </div>
             
           
@@ -216,7 +216,7 @@
 <p>directive specifies the type of action. name or clause(s) is additional information for the directive. name is a non-space ascii string and clause is a name with having parenthesis.</p>
 <p>Continuation of kgen directive is not supported yet.</p>
 <p>Three KGen directives are implemented as of this version.</p>
-<p>callsite directive</p>
+<p><strong>[ callsite directive ]</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>syntax: !$kgen callsite name
 </pre></div>
 </div>
@@ -227,7 +227,7 @@
                 CALL calc(i, j, output)
 </pre></div>
 </div>
-<p>begin_callsite and end_callsite directives</p>
+<p><strong>[ begin_callsite and end_callsite directives ]</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>syntax:
 !$kgen begin_callsite name
 ... fortran statements...
@@ -243,6 +243,28 @@
             END DO
         END DO
         !$kgen end_callsite calc
+</pre></div>
+</div>
+<p><strong>[ write directive ]</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>syntax: !$kgen write variable[,variable,...]
+</pre></div>
+</div>
+<p>meaning: write directive specifies variables whose content will be saved in state data files and will be read by a generated kernel. By using this directive, user can manually force KGen to save state data at arbitrary points of source code. Multiple variables can be specified by using comma in-between. Variable can be a member of derived type. One restriction of specifying variable is that it can not be an element of array but array itself. For example if A%B is an array it can not be specified as A%B[index].</p>
+<p>The directive can be located anywhere within executable part of source code.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>example:
+            !$kgen write i,j
+            CALL calc(i, j, output)
+</pre></div>
+</div>
+<p><strong>[ exclude directive ]</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>syntax: !$kgen exclude
+</pre></div>
+</div>
+<p>meaning: exclude directive specifies that next statement will be excluded during kernel generation. The main purpose of this directive is to support MPI &#8220;receiving&#8221; routines such as &#8220;recv&#8221; within generated kernel together with &#8220;write&#8221; directive. For example, user can use &#8220;write&#8221; directive to force KGen to read/write a variable and &#8220;exclude&#8221; MPI receiving routine.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>example:
+            !$kgen write data
+            !$kgen exclude
+            CALL MPI_RECV(data, count, MPI_DOUBLE_PRECISION, from, tag, MPI_COMM_WORLD, status, ierr )
 </pre></div>
 </div>
 </div>
@@ -470,23 +492,30 @@
 </div>
 <div class="section" id="known-issues">
 <h2>4. Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
-<p>Only subset of Fortran specification is supported.
-A variable of assumed size array is not supported for state generation
-File I/O and MPI communication in KGen-generated kernel is not supported
-Cyclic linked list is not supported.
-Pointer variable that is associated with part of input state to the kernel may ( or may not) generate issues depending on the usage of the variable within the extracted kernel</p>
+<ul class="simple">
+<li>Only subset of Fortran specification is supported.</li>
+<li>A variable of assumed size array is not supported for state generation</li>
+<li>File I/O and MPI communication in KGen-generated kernel is not supported</li>
+<li>Cyclic linked list is not supported.</li>
+<li>Pointer variable that is associated with part of input state to the kernel may ( or may not) generate issues depending on the usage of the variable within the extracted kernel</li>
+</ul>
 </div>
 <div class="section" id="changes-from-kgen-ver-0-6-3">
 <h2>5. Changes from KGen ver. 0.6.3<a class="headerlink" href="#changes-from-kgen-ver-0-6-3" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="user-interface">
 <h3>5.1 User Interface<a class="headerlink" href="#user-interface" title="Permalink to this headline">¶</a></h3>
-<p>Three mandatory options(clean, build and run of target application) are added in command line.
-strace, rebuild, prerun options are added</p>
+<ul class="simple">
+<li>Three mandatory options(clean, build and run of target application) are added in command line.</li>
+<li>strace, rebuild, prerun options are added</li>
+</ul>
 </div>
 <div class="section" id="major-improvements">
 <h3>5.2 Major Improvements<a class="headerlink" href="#major-improvements" title="Permalink to this headline">¶</a></h3>
-<p>Macro definitions and include paths are automatically generated by KGen</p>
-<p>&#8216;</p>
+<ul class="simple">
+<li>Macro definitions and include paths are automatically generated by KGen</li>
+<li>Supports manual state data generation</li>
+<li>Supports OpenMPI</li>
+</ul>
 </div>
 </div>
 </div>
@@ -511,7 +540,7 @@ strace, rebuild, prerun options are added</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, KGen Developers.
-      Last updated on Aug 22, 2016.
+      Last updated on Dec 27, 2016.
 
     </p>
   </div>
@@ -533,7 +562,7 @@ strace, rebuild, prerun options are added</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.1',
+            VERSION:'0.7.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  false
