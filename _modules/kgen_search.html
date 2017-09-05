@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kgen_search &mdash; KGen 0.7.2 documentation</title>
+  <title>kgen_search &mdash; KGen 0.8.0 documentation</title>
   
 
   
@@ -19,7 +19,7 @@
   
   
     
-      <link rel="search" type="application/opensearchdescription+xml" title="Search within KGen 0.7.2 documentation" href="../_static/opensearch.xml"/>
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within KGen 0.8.0 documentation" href="../_static/opensearch.xml"/>
     
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="KGen 0.7.2 documentation" href="../index.html"/>
+    <link rel="top" title="KGen 0.8.0 documentation" href="../index.html"/>
         <link rel="up" title="Module code" href="index.html"/> 
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.7.2
+                0.8.0
               </div>
             
           
@@ -149,7 +149,7 @@
 <span class="kn">from</span> <span class="nn">block_statements</span> <span class="k">import</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeDecl</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Subroutine</span><span class="p">,</span> <span class="n">Interface</span><span class="p">,</span> <span class="n">execution_part</span><span class="p">,</span> <span class="n">Associate</span>
 <span class="kn">from</span> <span class="nn">statements</span> <span class="k">import</span> <span class="n">External</span><span class="p">,</span> <span class="n">Common</span><span class="p">,</span> <span class="n">SpecificBinding</span>
 <span class="kn">from</span> <span class="nn">kgen_extra</span> <span class="k">import</span> <span class="n">Intrinsic_Procedures</span>
-<span class="kn">from</span> <span class="nn">ordereddict</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
 
 <span class="n">res_default</span> <span class="o">=</span> <span class="p">[</span> <span class="n">TypeDeclarationStatement</span> <span class="p">]</span>
 <span class="n">res_external</span> <span class="o">=</span> <span class="p">[</span> <span class="n">External</span> <span class="p">]</span>
@@ -174,24 +174,6 @@
 
 <span class="k">class</span> <span class="nc">SearchException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="k">pass</span>
-
-<span class="k">def</span> <span class="nf">is_except</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">stmt</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">stmt</span><span class="p">:</span> <span class="k">return</span> <span class="kc">False</span>
-
-    <span class="n">namelist</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">stmt</span><span class="o">.</span><span class="n">ancestors</span><span class="p">()]</span>
-    <span class="n">namelist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-    <span class="n">exceptlist</span> <span class="o">=</span> <span class="n">Config</span><span class="o">.</span><span class="n">search</span><span class="p">[</span><span class="s1">&#39;except&#39;</span><span class="p">]</span>
-
-    <span class="k">for</span> <span class="n">elist</span> <span class="ow">in</span> <span class="n">exceptlist</span><span class="p">:</span>
-        <span class="n">elist_split</span> <span class="o">=</span> <span class="n">elist</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
-        <span class="n">same</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">namelist</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">elist_split</span><span class="p">))):</span>
-            <span class="k">if</span> <span class="n">namelist</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">namelist</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">!=</span><span class="n">elist_split</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">elist_split</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="n">same</span> <span class="o">=</span> <span class="kc">False</span>
-                <span class="k">break</span>
-        <span class="k">if</span> <span class="n">same</span><span class="p">:</span> <span class="k">return</span> <span class="kc">True</span>
-
-    <span class="k">return</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="f2003_search_unknowns"><a class="viewcode-back" href="../reference/kgen_search.html#kgen_search.f2003_search_unknowns">[docs]</a><span class="k">def</span> <span class="nf">f2003_search_unknowns</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">resolvers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Identify unknowns whose declaration statement will be searched by KGen.</span>
@@ -310,40 +292,40 @@
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Fortran2003</span><span class="o">.</span><span class="n">Name</span><span class="p">):</span>
 
-        <span class="c1"># skip if intrinsic</span>
-        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">Intrinsic_Procedures</span><span class="p">:</span>
-            <span class="k">if</span>  <span class="n">Config</span><span class="o">.</span><span class="n">search</span><span class="p">[</span><span class="s1">&#39;skip_intrinsic&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_except</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">stmt</span><span class="p">):</span>
-                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="s1">&#39;parent&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">Fortran2003</span><span class="o">.</span><span class="n">Part_Ref</span><span class="p">)</span> <span class="ow">and</span> \
-                    <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">Fortran2003</span><span class="o">.</span><span class="n">Function_Reference</span><span class="p">)</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s1">&#39;null&#39;</span><span class="p">)</span> <span class="ow">and</span> \
-                    <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">Fortran2003</span><span class="o">.</span><span class="n">Specific_Binding</span><span class="p">)</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s1">&#39;null&#39;</span><span class="p">):</span>
-                    <span class="n">Logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Intrinsic procedure name of &quot;</span><span class="si">%s</span><span class="s1">&quot; is used for name resolution&#39;</span><span class="o">%</span> \
-                        <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()),</span> <span class="n">stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                    <span class="n">Logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">near &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="o">%</span> <span class="n">stmt</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">line</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                    <span class="n">Logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">in </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span> <span class="n">stmt</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="c1">#if node.string.lower()!=&#39;null&#39;:</span>
-                    <span class="c1">#    Logger.info(&#39;Intrinsic procedure name of &quot;%s&quot; is skipped from name resolution&#39;% \</span>
-                    <span class="c1">#        (node.string.lower()), stdout=True)</span>
-                    <span class="c1">#Logger.info(&#39;\tnear &quot;%s&quot;&#39;% stmt.item.line, stdout=True)</span>
-                    <span class="c1">#Logger.info(&#39;\tin %s&#39;% stmt.reader.id, stdout=True)</span>
-                    <span class="k">return</span>
-    
-            <span class="k">elif</span> <span class="ow">not</span> <span class="n">Config</span><span class="o">.</span><span class="n">search</span><span class="p">[</span><span class="s1">&#39;skip_intrinsic&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">is_except</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">stmt</span><span class="p">):</span> 
-                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="s1">&#39;parent&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">Fortran2003</span><span class="o">.</span><span class="n">Part_Ref</span><span class="p">)</span> <span class="ow">and</span> \
-                    <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">Fortran2003</span><span class="o">.</span><span class="n">Function_Reference</span><span class="p">)</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s1">&#39;null&#39;</span><span class="p">)</span> <span class="ow">and</span> \
-                    <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">Fortran2003</span><span class="o">.</span><span class="n">Specific_Binding</span><span class="p">)</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s1">&#39;null&#39;</span><span class="p">):</span>
-                    <span class="c1">#Logger.info(&#39;Intrinsic procedure name of &quot;%s&quot; is NOT skipped from name resolution&#39;% \</span>
-                    <span class="c1">#    (node.string.lower()), stdout=True)</span>
-                    <span class="c1">#Logger.info(&#39;\tnear &quot;%s&quot;&#39;% stmt.item.line, stdout=True)</span>
-                    <span class="c1">#Logger.info(&#39;\tin %s&#39;% stmt.reader.id, stdout=True)</span>
-                    <span class="k">pass</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">!=</span><span class="s1">&#39;null&#39;</span><span class="p">:</span>
-                        <span class="n">Logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Intrinsic procedure name of &quot;</span><span class="si">%s</span><span class="s1">&quot; is skipped from name resolution&#39;</span><span class="o">%</span> \
-                            <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()),</span> <span class="n">stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                    <span class="n">Logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">near &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span><span class="o">%</span> <span class="n">stmt</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">line</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                    <span class="n">Logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">in </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span> <span class="n">stmt</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                    <span class="k">return</span>
+<span class="c1">#        # skip if intrinsic</span>
+<span class="c1">#        if node.string.lower() in Intrinsic_Procedures:</span>
+<span class="c1">#            if  Config.search[&#39;skip_intrinsic&#39;] and not is_except(node, stmt):</span>
+<span class="c1">#                if hasattr(node, &#39;parent&#39;) and not isinstance(node.parent, Fortran2003.Part_Ref) and \</span>
+<span class="c1">#                    not (isinstance(node.parent, Fortran2003.Function_Reference) and node.string.lower()==&#39;null&#39;) and \</span>
+<span class="c1">#                    not (isinstance(node.parent, Fortran2003.Specific_Binding) and node.string.lower()==&#39;null&#39;):</span>
+<span class="c1">#                    Logger.info(&#39;Intrinsic procedure name of &quot;%s&quot; is used for name resolution&#39;% \</span>
+<span class="c1">#                        (node.string.lower()), stdout=True)</span>
+<span class="c1">#                    Logger.info(&#39;\tnear &quot;%s&quot;&#39;% stmt.item.line, stdout=True)</span>
+<span class="c1">#                    Logger.info(&#39;\tin %s&#39;% stmt.reader.id, stdout=True)</span>
+<span class="c1">#                else:</span>
+<span class="c1">#                    #if node.string.lower()!=&#39;null&#39;:</span>
+<span class="c1">#                    #    Logger.info(&#39;Intrinsic procedure name of &quot;%s&quot; is skipped from name resolution&#39;% \</span>
+<span class="c1">#                    #        (node.string.lower()), stdout=True)</span>
+<span class="c1">#                    #Logger.info(&#39;\tnear &quot;%s&quot;&#39;% stmt.item.line, stdout=True)</span>
+<span class="c1">#                    #Logger.info(&#39;\tin %s&#39;% stmt.reader.id, stdout=True)</span>
+<span class="c1">#                    return</span>
+<span class="c1">#    </span>
+<span class="c1">#            elif not Config.search[&#39;skip_intrinsic&#39;] and is_except(node, stmt): </span>
+<span class="c1">#                if hasattr(node, &#39;parent&#39;) and not isinstance(node.parent, Fortran2003.Part_Ref) and \</span>
+<span class="c1">#                    not (isinstance(node.parent, Fortran2003.Function_Reference) and node.string.lower()==&#39;null&#39;) and \</span>
+<span class="c1">#                    not (isinstance(node.parent, Fortran2003.Specific_Binding) and node.string.lower()==&#39;null&#39;):</span>
+<span class="c1">#                    #Logger.info(&#39;Intrinsic procedure name of &quot;%s&quot; is NOT skipped from name resolution&#39;% \</span>
+<span class="c1">#                    #    (node.string.lower()), stdout=True)</span>
+<span class="c1">#                    #Logger.info(&#39;\tnear &quot;%s&quot;&#39;% stmt.item.line, stdout=True)</span>
+<span class="c1">#                    #Logger.info(&#39;\tin %s&#39;% stmt.reader.id, stdout=True)</span>
+<span class="c1">#                    pass</span>
+<span class="c1">#                else:</span>
+<span class="c1">#                    if node.string.lower()!=&#39;null&#39;:</span>
+<span class="c1">#                        Logger.info(&#39;Intrinsic procedure name of &quot;%s&quot; is skipped from name resolution&#39;% \</span>
+<span class="c1">#                            (node.string.lower()), stdout=True)</span>
+<span class="c1">#                    Logger.info(&#39;\tnear &quot;%s&quot;&#39;% stmt.item.line, stdout=True)</span>
+<span class="c1">#                    Logger.info(&#39;\tin %s&#39;% stmt.reader.id, stdout=True)</span>
+<span class="c1">#                    return</span>
 
         <span class="c1"># skip if excluded</span>
         <span class="c1">#if Config.exclude.has_key(&#39;namepath&#39;) and stmt.__class__ in execution_part:</span>
@@ -754,9 +736,9 @@
     <span class="c1"># NOTE: to limit the scope of data saving in derived type,</span>
     <span class="c1">#       the last part_ref would be the one that has gentype=gentype</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Name</span><span class="p">):</span>
-        <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res_typestmt</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="n">gentype</span><span class="p">)</span>
+        <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res_value</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="n">gentype</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Part_Ref</span><span class="p">):</span>
-        <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res_typestmt</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="n">gentype</span><span class="p">)</span> 
+        <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res_value</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="n">gentype</span><span class="p">)</span> 
         <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">res_value</span><span class="p">)</span> 
 
     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
@@ -1219,10 +1201,11 @@
     <span class="sd">&quot;&quot;&quot; Identifying a name in Specific_Binding node&quot;&quot;&quot;</span>
     <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res_typespec</span> <span class="o">+</span> <span class="p">[</span> <span class="n">Interface</span> <span class="p">])</span>
     <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">res_value</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">res_subprogram</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">res_subprogram</span><span class="p">)</span></div>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;string&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">&#39;DEFERRED&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">string</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">res_subprogram</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">res_subprogram</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="search_Binding_Attr"><a class="viewcode-back" href="../reference/kgen_search.html#kgen_search.search_Binding_Attr">[docs]</a><span class="k">def</span> <span class="nf">search_Binding_Attr</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Identifying a name in Binding_Attr node&quot;&quot;&quot;</span>
@@ -1247,7 +1230,7 @@
 <div class="viewcode-block" id="search_Generic_Binding"><a class="viewcode-back" href="../reference/kgen_search.html#kgen_search.search_Generic_Binding">[docs]</a><span class="k">def</span> <span class="nf">search_Generic_Binding</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Identifying a name in Generic_Binding node&quot;&quot;&quot;</span>
     <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res_value</span><span class="p">)</span>
-    <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span> <span class="n">Fortran2003</span><span class="o">.</span><span class="n">Specific_Binding</span> <span class="p">])</span></div>
+    <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span> <span class="n">SpecificBinding</span> <span class="p">])</span></div>
 
 <div class="viewcode-block" id="search_Complex_Literal_Constant"><a class="viewcode-back" href="../reference/kgen_search.html#kgen_search.search_Complex_Literal_Constant">[docs]</a><span class="k">def</span> <span class="nf">search_Complex_Literal_Constant</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Identifying a name in Complex_Literal_Constant node&quot;&quot;&quot;</span>
@@ -1277,10 +1260,22 @@
 
 <div class="viewcode-block" id="search_Stmt_Function_Stmt"><a class="viewcode-back" href="../reference/kgen_search.html#kgen_search.search_Stmt_Function_Stmt">[docs]</a><span class="k">def</span> <span class="nf">search_Stmt_Function_Stmt</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Identifying a name in Stmt_Function_Stmt node&quot;&quot;&quot;</span>
-    <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res_typedecl</span><span class="p">)</span>
+    <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res_typedecl</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="search_Language_Binding_Spec"><a class="viewcode-back" href="../reference/kgen_search.html#kgen_search.search_Language_Binding_Spec">[docs]</a><span class="k">def</span> <span class="nf">search_Language_Binding_Spec</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Identifying a name in Language_Binding_Spec node&quot;&quot;&quot;</span>
+    <span class="c1"># No need to resolve exteranl c library routines</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="search_Select_Type_Stmt"><a class="viewcode-back" href="../reference/kgen_search.html#kgen_search.search_Select_Type_Stmt">[docs]</a><span class="k">def</span> <span class="nf">search_Select_Type_Stmt</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Identifying a name in search_Select_Type_Stmt node&quot;&quot;&quot;</span>
+    <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">res_typedecl</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="search_Type_Guard_Stmt"><a class="viewcode-back" href="../reference/kgen_search.html#kgen_search.search_Type_Guard_Stmt">[docs]</a><span class="k">def</span> <span class="nf">search_Type_Guard_Stmt</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">gentype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Identifying a name in search_Type_Guard_Stmt node&quot;&quot;&quot;</span>
+    <span class="n">get_name_or_defer</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">res_typespec</span><span class="p">)</span></div>
     <span class="c1">#show_tree(node)</span>
     <span class="c1">#import pdb ;pdb.set_trace()</span>
-    <span class="k">pass</span></div>
 </pre></div>
 
            </div>
@@ -1292,8 +1287,8 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, KGen Developers.
-      Last updated on Dec 27, 2016.
+        &copy; Copyright 2017, KGen Developers.
+      Last updated on Sep 04, 2017.
 
     </p>
   </div>
@@ -1315,7 +1310,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.7.2',
+            VERSION:'0.8.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  false
