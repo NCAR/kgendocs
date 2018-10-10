@@ -210,7 +210,7 @@
 </div>
 <div class="section" id="command-line-syntax">
 <h3>2.2 Command-line syntax<a class="headerlink" href="#command-line-syntax" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default"><div class="highlight"><pre><span></span>&gt;&gt; $PATH_TO_KGen/bin/kgen \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt; $PATH_TO_KGen/bin/kgen \
     --cmd-clean &lt;commands&gt; \
     --cmd-build &lt;commands&gt; \
     --cmd-run &lt;commands&gt; \
@@ -234,7 +234,7 @@
 </pre></div>
 </div>
 <p>If there are multiple Linux commands, use semicolon between them. Use quotation marks if there are spaces in commands.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">example</span><span class="p">:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">example</span><span class="p">:</span>
 
 <span class="n">kgen</span> <span class="n">callsite</span><span class="o">.</span><span class="n">F90</span> \
     <span class="s2">&quot;--cmd-clean cd $WORK; make clean&quot;</span> \
@@ -250,16 +250,16 @@
 <div class="section" id="kgen-directive-user-interface">
 <h4>2.3.1 KGen directive user interface<a class="headerlink" href="#kgen-directive-user-interface" title="Permalink to this headline">¶</a></h4>
 <p>In general, the syntax of KGen directive follows OpenMP-like syntax. Case is not sensitive if not specified.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>SYNTAX: !$kgen directive name/clause(s)
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>SYNTAX: !$kgen directive name/clause(s)
 </pre></div>
 </div>
-<p>&#8220;directive&#8221; specifies the type of action. &#8220;name&#8221; or &#8220;clause(s)&#8221; is additional information for the directive. &#8220;name&#8221; is a non-space ascii string and &#8220;clause&#8221; is a name with having parenthesis.</p>
+<p>“directive” specifies the type of action. “name” or “clause(s)” is additional information for the directive. “name” is a non-space ascii string and “clause” is a name with having parenthesis.</p>
 <p>Continuation of kgen directive is not supported yet.</p>
 <p>Five KGen directives are implemented as of this version.</p>
 <ul class="simple">
-<li>&#8220;callsite&#8221; directive</li>
+<li>“callsite” directive</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span>syntax: !$kgen callsite name
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>syntax: !$kgen callsite name
 
 meaning: callsite directive specifies the location
 of callsite Fortran statement in a source file.
@@ -277,9 +277,9 @@ example:
 </pre></div>
 </div>
 <ul class="simple">
-<li>&#8220;begin_callsite&#8221; and &#8220;end_callsite&#8221; directives</li>
+<li>“begin_callsite” and “end_callsite” directives</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span>syntax:
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>syntax:
 !$kgen begin_callsite name
 ... fortran statements...
 !$kgen end_callsite
@@ -299,9 +299,9 @@ example:
 </pre></div>
 </div>
 <ul class="simple">
-<li>&#8220;write&#8221; directive</li>
+<li>“write” directive</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span>syntax: !$kgen write variable[,variable,...]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>syntax: !$kgen write variable[,variable,...]
 
 meaning: write directive specifies variables whose
 content will be saved in state data files and will
@@ -322,9 +322,9 @@ example:
 </pre></div>
 </div>
 <ul class="simple">
-<li>&#8220;exclude&#8221; directive</li>
+<li>“exclude” directive</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span>syntax: !$kgen exclude
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>syntax: !$kgen exclude
 
 meaning: exclude directive specifies that next statement
 will be excluded during kernel generation. The main
@@ -345,7 +345,7 @@ example:
 <div class="section" id="kgen-command-line-user-interface">
 <h4>2.3.2 KGen command-line user interface<a class="headerlink" href="#kgen-command-line-user-interface" title="Permalink to this headline">¶</a></h4>
 <p>KGen can be invoked using command line interface too.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>&gt;&gt; $PATH_TO_KGen/bin/kgen [KGen options] &lt;filepath&gt;[:&lt;namepath&gt;]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt; $PATH_TO_KGen/bin/kgen [KGen options] &lt;filepath&gt;[:&lt;namepath&gt;]
     &lt;clean commands&gt; &lt;build commands&gt; &lt;run commands&gt;
 </pre></div>
 </div>
@@ -358,7 +358,7 @@ example:
 <h4>2.4.1 Namepath<a class="headerlink" href="#namepath" title="Permalink to this headline">¶</a></h4>
 <p>To resolve possible name conflict among different levels of namespace, KGen introduces a hierarchical representation of a name, called namepath.</p>
 <p>Namepath is consecutive names with colons between them as a separator.  For example, if name B is inside of A, then it can be represented by A:B. In practice, it is used to specify  identifiers in KGen. For example, a kernel extraction region can be specified as following:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">example</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">example</span><span class="p">)</span>
 <span class="n">module</span> <span class="n">A</span>
     <span class="n">subroutine</span> <span class="n">B</span>
         <span class="n">CALL</span> <span class="n">C</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
@@ -366,10 +366,10 @@ example:
 <span class="n">end</span> <span class="n">module</span> <span class="n">A</span>
 </pre></div>
 </div>
-<p>To specify CALL C(...) statement in above sample code, user can use A:B:C namepath.</p>
+<p>To specify CALL C(…) statement in above sample code, user can use A:B:C namepath.</p>
 <p>To increase the usability of namepath, several syntactic features are added to above basic usage.</p>
 <p>The separator of colon can be used as a metacharacter meaning of any similar to * in ls linux command. First, leading colon means any names can be placed before a name placed next to the colon. For example, :name_a means any namepath that ends with name_a. Similarly, colon at the end of a namepath means any names can be followed after a name placed before the colon. For example, name_a: matches to any namepath that starts with name_a. Finally, double colons between names means any names can be placed between the two names. For example, name_a::name_b matched to any namepaths that starts with name_a and ends with name_b</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Namepath</span> <span class="n">examples</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Namepath</span> <span class="n">examples</span><span class="p">)</span>
 
 <span class="n">C</span> <span class="o">=&gt;</span> <span class="n">A</span> <span class="n">name</span> <span class="n">that</span> <span class="n">has</span> <span class="n">only</span> <span class="n">one</span><span class="o">-</span><span class="n">level</span> <span class="n">whose</span> <span class="n">name</span>
     <span class="ow">is</span> <span class="n">C</span> <span class="n">such</span> <span class="k">as</span> <span class="n">module</span> <span class="n">C</span>
@@ -394,7 +394,7 @@ example:
 <p>Syntax of the INI file follows conventional INI file syntax. Brackets are used to specify sections. In a section, an option is added in a line or over multiple lines. Each option has a format of key and value pair with a separator of =. Value part can be missed depending on the type of option.</p>
 <p>2.4.2.1 INI sections applicable to each source file</p>
 <p>Some information has to be provided per each source file separately. As of this version, there are four types of information are identified in this category: macro definition,include directory, compiler path and compiler options. Following convention is used to provide these information in the INI file.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">Path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">source</span><span class="o">-</span><span class="n">file</span> <span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">Path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">source</span><span class="o">-</span><span class="n">file</span> <span class="p">]</span>
 <span class="n">include</span> <span class="o">=</span> <span class="p">[</span><span class="n">directory</span> <span class="n">path</span><span class="p">]:[</span><span class="n">directory</span> <span class="n">path</span><span class="p">]:</span><span class="o">...</span>
 <span class="n">macro_name</span> <span class="o">=</span> <span class="n">macro_value</span>
 <span class="o">...</span>
@@ -417,13 +417,13 @@ example:
 <p>There are several types of information that can be applied to all source files that KGen analyzes.</p>
 <p>Common macro definitions and include directories</p>
 <p>In some cases, all source files may share the same macro definitions and/or include directories. In the cases, instead of specifying the information per each source file sections, user can use following sections.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">macro</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">macro</span><span class="p">]</span>
 <span class="n">macro_name</span> <span class="o">=</span> <span class="n">macro_value</span>
 <span class="o">...</span>
 </pre></div>
 </div>
 <p>These macros will be added to each source file during KGen analysis.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">include</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">include</span><span class="p">]</span>
 <span class="n">include_path1</span> <span class="o">=</span>
 <span class="n">include_path2</span> <span class="o">=</span>
 <span class="o">...</span>
@@ -432,18 +432,18 @@ example:
 <p>These include_paths will be added to each source file during KGen analysis. Note that each path should be specified per each line, which is different from the syntax of separate section for each file. Value part of each option should be blank for this version and is reserved for later use.</p>
 <p>2.4.2.3 INI sections applicable to KGen operations</p>
 <p>User can set a compiler command and compiler options to be used in extracted kernel.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">compiler</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">compiler</span><span class="p">]</span>
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">compiler</span>
 <span class="n">compiler_options</span> <span class="o">=</span> <span class="n">compiler</span> <span class="n">options</span>
 </pre></div>
 </div>
 <p>User can provide additional information to import source files or object files or library files through import section in a INI file.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">import</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">import</span><span class="p">]</span>
 <span class="n">filepath</span> <span class="o">=</span> <span class="n">action</span>
 </pre></div>
 </div>
 <p>source and object and library actions are implemented as of this version. source action in import section provides KGen with paths to additional files to be analyzed before starting main parsing tasks. object action specifies a path to an object file that will be copied to kernel output directory. Library actions specifies a path to a folder contains libraries and name of library(similar to -L and -l compiler option)</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">import</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">import</span><span class="p">]</span>
 <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="n">file</span><span class="o">.</span><span class="n">F90</span> <span class="o">=</span> <span class="n">source</span>
 <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="nb">object</span><span class="o">/</span><span class="n">file</span><span class="o">.</span><span class="n">o</span> <span class="o">=</span> <span class="nb">object</span>
 <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">folder</span><span class="o">/</span><span class="n">contains</span><span class="o">/</span><span class="n">library_files</span> <span class="o">=</span> <span class="n">library</span><span class="p">(</span><span class="n">libname</span><span class="p">)</span>
@@ -453,13 +453,13 @@ example:
 <div class="section" id="user-provided-exclude-information">
 <h4>2.4.3 User-provided exclude information<a class="headerlink" href="#user-provided-exclude-information" title="Permalink to this headline">¶</a></h4>
 <p>KGen accepts an INI-format file with -e command-line option. In the INI file, user can provide KGen with information of names( or namepaths) to be excluded during name search. Details of using the INI file are explained in following sections.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Command</span> <span class="n">line</span> <span class="n">option</span> <span class="nb">format</span><span class="p">:</span> <span class="o">-</span><span class="n">e</span> <span class="o">&lt;</span><span class="n">user</span><span class="o">-</span><span class="n">providing</span> <span class="n">INI</span> <span class="nb">format</span> <span class="n">file</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Command</span> <span class="n">line</span> <span class="n">option</span> <span class="nb">format</span><span class="p">:</span> <span class="o">-</span><span class="n">e</span> <span class="o">&lt;</span><span class="n">user</span><span class="o">-</span><span class="n">providing</span> <span class="n">INI</span> <span class="nb">format</span> <span class="n">file</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>Syntax of the INI file follows conventional INI file syntax. Brackets are used to specify sections. In a section, a option is added in a line or over multiple lines.</p>
 <p>2.4.3.1 namepath section</p>
 <p>When namepath is specified in a section of INI file, actions specified in an option are applied to namepath in the option.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">namepath</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">namepath</span><span class="p">]</span>
 <span class="n">namepath</span> <span class="o">=</span> <span class="p">[</span><span class="n">action</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -476,27 +476,27 @@ example:
 <p>From version 0.8, KGen supports several features related to representativeness of a generated kernel.</p>
 <div class="section" id="general">
 <h3>3.1 General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h3>
-<p>KGen version 8 include three types of representativeness extensions: 1) elapsed time, 2) PAPI (<a class="reference external" href="http://icl.utk.edu/papi/">http://icl.utk.edu/papi/</a>) hardware counter, and 3) source code coverage of Fortran IF construct. By adding command-line options explained in section 4, user can use the extensions. All extensions can be used with each other. Basic operations for the extensions start with measuring corresponding values of the kernel block from running original application. When completed the measurement, KGen saves measured values in &#8220;model.ini&#8221; file in output directory.</p>
-<p>The file has a simple INI file format. To compare measurements between original applicatioin and kernel, user may want to read data from this file. Measured data are saved as options under a specified section in the INI file for each type of measurements. For example, &#8220;elapsed time&#8221; measurements are under &#8220;elapsedtime.elapsedtime&#8221; section, PAPI counters are under &#8220;papi.counters&#8221;, and code coverages are under &#8220;coverage.invoke&#8221; section. The format of each section are explained below.</p>
+<p>KGen version 8 include three types of representativeness extensions: 1) elapsed time, 2) PAPI (<a class="reference external" href="http://icl.utk.edu/papi/">http://icl.utk.edu/papi/</a>) hardware counter, and 3) source code coverage of Fortran IF construct. By adding command-line options explained in section 4, user can use the extensions. All extensions can be used with each other. Basic operations for the extensions start with measuring corresponding values of the kernel block from running original application. When completed the measurement, KGen saves measured values in “model.ini” file in output directory.</p>
+<p>The file has a simple INI file format. To compare measurements between original applicatioin and kernel, user may want to read data from this file. Measured data are saved as options under a specified section in the INI file for each type of measurements. For example, “elapsed time” measurements are under “elapsedtime.elapsedtime” section, PAPI counters are under “papi.counters”, and code coverages are under “coverage.invoke” section. The format of each section are explained below.</p>
 <p>The INI file is read by KGen to automatically generate a set of invocation triplets that maximize representativeness. User may set the maximum number of data files through sub-options as explained in Section 4.</p>
 </div>
 <div class="section" id="elapsed-time">
 <h3>3.2 Elapsed time<a class="headerlink" href="#elapsed-time" title="Permalink to this headline">¶</a></h3>
-<p>&#8220;&#8211;repr-etime&#8221; KGen command-option turns on the extension. This option is turned on as default so that user does not need to explictely enable this option. With this option enabled, KGen add &#8220;elapsed time&#8221; measurements under &#8220;elapsedtime.elapsedtime&#8221; INI section. The format of data is &#8220;&lt;MPI rank&gt; &lt;OpenMP thread&gt; &lt;Invocation order&gt; = &lt;start time&gt; &lt;stop time&gt;&#8221;. When generated kernel is executed, &#8220;elapsed time&#8221; data will be displayed on screen. User may compare the values on screen with ones in &#8220;model.ini&#8221; file. For details about the option, please see &#8220;Command line options&#8221; section.</p>
+<p>“–repr-etime” KGen command-option turns on the extension. This option is turned on as default so that user does not need to explictely enable this option. With this option enabled, KGen add “elapsed time” measurements under “elapsedtime.elapsedtime” INI section. The format of data is “&lt;MPI rank&gt; &lt;OpenMP thread&gt; &lt;Invocation order&gt; = &lt;start time&gt; &lt;stop time&gt;”. When generated kernel is executed, “elapsed time” data will be displayed on screen. User may compare the values on screen with ones in “model.ini” file. For details about the option, please see “Command line options” section.</p>
 </div>
 <div class="section" id="papi-hardware-counter">
 <h3>3.2 PAPI hardware counter<a class="headerlink" href="#papi-hardware-counter" title="Permalink to this headline">¶</a></h3>
-<p>&#8220;&#8211;repr-papi&#8221; KGen command-option turns on the extension. To use this option, user has to provide KGen with additional information: &lt;papi event name&gt;, &lt;path to PAPI fortran header file&gt;, and &lt;path to PAPI static library&gt;. With this option enabled, KGen add &#8220;papi hardware event&#8221; measurements under &#8220;papi.counters&#8221; INI section. The format of data is &#8220;&lt;MPI rank&gt; &lt;OpenMP thread&gt; &lt;Invocation order&gt; = &lt;event counts&gt;&#8221;. When generated kernel is built with &#8220;make papi&#8221; and executed, &#8220;papi counter&#8221; data will be displayed on screen. User may compare the values on screen with ones in &#8220;model.ini&#8221; file. For details about the option, please see &#8220;Command line options&#8221; section.</p>
+<p>“–repr-papi” KGen command-option turns on the extension. To use this option, user has to provide KGen with additional information: &lt;papi event name&gt;, &lt;path to PAPI fortran header file&gt;, and &lt;path to PAPI static library&gt;. With this option enabled, KGen add “papi hardware event” measurements under “papi.counters” INI section. The format of data is “&lt;MPI rank&gt; &lt;OpenMP thread&gt; &lt;Invocation order&gt; = &lt;event counts&gt;”. When generated kernel is built with “make papi” and executed, “papi counter” data will be displayed on screen. User may compare the values on screen with ones in “model.ini” file. For details about the option, please see “Command line options” section.</p>
 </div>
 <div class="section" id="source-code-coverage">
 <h3>3.2 Source code coverage<a class="headerlink" href="#source-code-coverage" title="Permalink to this headline">¶</a></h3>
-<p>&#8220;&#8211;repr-code&#8221; KGen command-option turns on the extension. With this option enabled, KGen add &#8220;code visits&#8221; measurements under &#8220;coverage.invoke&#8221; INI section. The format of data is &#8220;&lt;MPI rank&gt; &lt;OpenMP thread&gt; &lt;Invocation order&gt; = &lt;fileid&gt; &lt;line number&gt; &lt;number of visits&gt;&#8221;. Actual path of &#8220;fileid&#8221; is defined in &#8220;coverage.file&#8221; INI section. Coverage information can be found in generated source files having extension of &#8220;coverage&#8221; in &#8220;coverage&#8221; directory under output directory. For details about the option, please see &#8220;Command line options&#8221; section.</p>
+<p>“–repr-code” KGen command-option turns on the extension. With this option enabled, KGen add “code visits” measurements under “coverage.invoke” INI section. The format of data is “&lt;MPI rank&gt; &lt;OpenMP thread&gt; &lt;Invocation order&gt; = &lt;fileid&gt; &lt;line number&gt; &lt;number of visits&gt;”. Actual path of “fileid” is defined in “coverage.file” INI section. Coverage information can be found in generated source files having extension of “coverage” in “coverage” directory under output directory. For details about the option, please see “Command line options” section.</p>
 </div>
 </div>
 <div class="section" id="command-line-options">
 <h2>4. Command line options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h2>
 <p>The syntax of each options generally follows the following convention:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">General</span> <span class="n">KGen</span> <span class="n">option</span> <span class="n">syntax</span><span class="p">:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">General</span> <span class="n">KGen</span> <span class="n">option</span> <span class="n">syntax</span><span class="p">:</span>
 <span class="o">-</span><span class="p">[</span><span class="o">-</span><span class="p">]</span><span class="o">&lt;</span><span class="n">option</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">suboption</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;=&lt;</span><span class="n">suboption</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span>
     <span class="p">[,[</span><span class="o">&lt;</span><span class="n">suboption</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;=</span><span class="p">]</span><span class="o">&lt;</span><span class="n">suboption</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span><span class="p">]]</span>
 </pre></div>
@@ -506,7 +506,7 @@ would be separated by colon, :. Double or single quotation marks can be
 used to use some of the separation symbols, such as equal sign, comma,
 colon, in option value.</p>
 <p>[-c or - -cmd-clean]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">This</span> <span class="n">mandatory</span> <span class="n">option</span> <span class="ow">is</span> <span class="n">Linux</span> <span class="n">command</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">that</span> <span class="n">ensure</span> <span class="n">that</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">This</span> <span class="n">mandatory</span> <span class="n">option</span> <span class="ow">is</span> <span class="n">Linux</span> <span class="n">command</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">that</span> <span class="n">ensure</span> <span class="n">that</span>
 <span class="nb">next</span> <span class="n">build</span> <span class="n">commands</span> <span class="n">actually</span> <span class="n">compiles</span> <span class="nb">all</span> <span class="n">source</span> <span class="n">files</span> <span class="n">that</span> <span class="n">KGen</span>
 <span class="n">requires</span> <span class="n">to</span> <span class="n">analyze</span><span class="o">.</span>
 
@@ -514,27 +514,27 @@ colon, in option value.</p>
 </pre></div>
 </div>
 <p>[-b or - -cmd-build]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">This</span> <span class="n">mandatory</span> <span class="n">option</span> <span class="ow">is</span> <span class="n">Linux</span> <span class="n">command</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">that</span> <span class="n">compiles</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">This</span> <span class="n">mandatory</span> <span class="n">option</span> <span class="ow">is</span> <span class="n">Linux</span> <span class="n">command</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">that</span> <span class="n">compiles</span>
 <span class="n">target</span> <span class="n">application</span><span class="o">.</span>
 
 <span class="n">example</span><span class="p">)</span> <span class="o">--</span><span class="n">cmd</span><span class="o">-</span><span class="n">build</span> <span class="n">cd</span> <span class="n">src</span><span class="p">;</span> <span class="n">make</span> <span class="n">build</span>
 </pre></div>
 </div>
 <p>[-r or - -cmd-run]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span>  <span class="n">This</span> <span class="n">mandatory</span> <span class="n">option</span> <span class="ow">is</span> <span class="n">Linux</span> <span class="n">command</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">that</span> <span class="n">executes</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span>  <span class="n">This</span> <span class="n">mandatory</span> <span class="n">option</span> <span class="ow">is</span> <span class="n">Linux</span> <span class="n">command</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">that</span> <span class="n">executes</span>
 <span class="n">target</span> <span class="n">application</span><span class="o">.</span>
 
 <span class="n">example</span><span class="p">)</span> <span class="o">--</span><span class="n">cmd</span><span class="o">-</span><span class="n">run</span> <span class="n">cd</span> <span class="n">src</span><span class="p">;</span> <span class="n">make</span> <span class="n">run</span>
 </pre></div>
 </div>
 <p>[- -outdir]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">KGen</span> <span class="n">output</span> <span class="n">directory</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">KGen</span> <span class="n">output</span> <span class="n">directory</span>
 
 <span class="n">example</span><span class="p">)</span> <span class="o">--</span><span class="n">outdir</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">directory</span>
 </pre></div>
 </div>
 <p>[- -rebuild]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span>  <span class="n">This</span> <span class="n">option</span> <span class="n">forces</span> <span class="n">KGen</span> <span class="n">generates</span> <span class="n">intermittent</span> <span class="n">files</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span>  <span class="n">This</span> <span class="n">option</span> <span class="n">forces</span> <span class="n">KGen</span> <span class="n">generates</span> <span class="n">intermittent</span> <span class="n">files</span>
 <span class="n">such</span> <span class="k">as</span> <span class="n">strace</span> <span class="n">log</span> <span class="n">files</span> <span class="ow">and</span> <span class="n">include</span><span class="o">.</span><span class="n">ini</span> <span class="n">files</span><span class="o">.</span> <span class="n">Current</span> <span class="n">version</span>
 <span class="n">supports</span> <span class="n">strace</span><span class="p">,</span> <span class="n">include</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">papi</span><span class="p">,</span> <span class="n">coverage</span><span class="p">,</span> <span class="ow">and</span> <span class="n">etime</span> <span class="n">sub</span><span class="o">-</span><span class="n">options</span><span class="o">.</span>
 <span class="n">strace</span> <span class="n">forces</span> <span class="n">to</span> <span class="n">rebuild</span> <span class="n">strace</span><span class="o">.</span><span class="n">log</span> <span class="n">file</span><span class="o">.</span> <span class="n">include</span> <span class="n">forces</span> <span class="n">to</span> <span class="n">rebuild</span>
@@ -548,7 +548,7 @@ colon, in option value.</p>
 </pre></div>
 </div>
 <p>[- -prerun]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span>  <span class="n">This</span> <span class="n">options</span> <span class="n">provide</span> <span class="n">a</span> <span class="n">way</span> <span class="k">for</span> <span class="n">user</span> <span class="n">to</span> <span class="n">specify</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span>  <span class="n">This</span> <span class="n">options</span> <span class="n">provide</span> <span class="n">a</span> <span class="n">way</span> <span class="k">for</span> <span class="n">user</span> <span class="n">to</span> <span class="n">specify</span>
 <span class="n">Linux</span> <span class="n">commands</span> <span class="n">that</span> <span class="n">are</span> <span class="n">executed</span> <span class="n">before</span> <span class="n">KGen</span> <span class="n">executes</span> <span class="n">Linux</span>
 <span class="n">shell</span> <span class="n">command</span> <span class="n">at</span> <span class="n">several</span> <span class="n">stages</span> <span class="n">during</span> <span class="n">kernel</span> <span class="n">extraction</span><span class="o">.</span>
 <span class="n">There</span> <span class="n">are</span> <span class="n">five</span> <span class="n">sub</span><span class="o">-</span><span class="n">options</span> <span class="n">are</span> <span class="n">supported</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">version</span><span class="p">:</span>
@@ -561,20 +561,8 @@ colon, in option value.</p>
 <span class="n">module</span> <span class="n">load</span> <span class="n">mkl</span>
 </pre></div>
 </div>
-<p>[-I]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">specify</span> <span class="n">paths</span> <span class="k">for</span> <span class="n">searching</span> <span class="n">source</span> <span class="n">files</span><span class="o">.</span>
-
-<span class="n">example</span><span class="p">)</span> <span class="o">-</span><span class="n">I</span> <span class="o">./</span><span class="n">src</span>
-</pre></div>
-</div>
-<p>[-D]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">specify</span> <span class="n">macros</span> <span class="n">that</span> <span class="n">will</span> <span class="n">be</span> <span class="n">replaced</span> <span class="ow">in</span> <span class="n">source</span> <span class="n">files</span><span class="o">.</span>
-
-<span class="n">example</span><span class="p">)</span> <span class="o">-</span><span class="n">D</span> <span class="n">ROWS</span><span class="o">=</span><span class="mi">4</span>
-</pre></div>
-</div>
 <p>[-i or - -include-ini]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">specify</span> <span class="n">paths</span> <span class="k">for</span> <span class="n">include</span> <span class="n">INI</span> <span class="n">file</span><span class="o">.</span> <span class="n">If</span> <span class="n">include</span> <span class="n">INI</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">specify</span> <span class="n">paths</span> <span class="k">for</span> <span class="n">include</span> <span class="n">INI</span> <span class="n">file</span><span class="o">.</span> <span class="n">If</span> <span class="n">include</span> <span class="n">INI</span>
 <span class="n">file</span> <span class="ow">is</span> <span class="n">specified</span><span class="p">,</span> <span class="n">KGen</span> <span class="n">uses</span> <span class="n">the</span> <span class="n">file</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">generating</span>
 <span class="n">new</span> <span class="n">include</span> <span class="n">INI</span> <span class="n">file</span><span class="o">.</span>
 
@@ -582,7 +570,7 @@ colon, in option value.</p>
 </pre></div>
 </div>
 <p>[- -invocation]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">specifies</span> <span class="n">invocatioin</span> <span class="n">triples</span><span class="o">.</span> <span class="n">From</span> <span class="n">KGen</span> <span class="n">version</span> <span class="mf">0.8</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">specifies</span> <span class="n">invocatioin</span> <span class="n">triples</span><span class="o">.</span> <span class="n">From</span> <span class="n">KGen</span> <span class="n">version</span> <span class="mf">0.8</span><span class="p">,</span>
 <span class="n">user</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">have</span> <span class="n">to</span> <span class="n">specify</span> <span class="n">this</span> <span class="n">option</span> <span class="k">as</span> <span class="n">KGen</span> <span class="n">automatically</span>
 <span class="n">generate</span> <span class="n">invocation</span> <span class="n">triples</span><span class="o">.</span> <span class="n">However</span><span class="p">,</span> <span class="n">user</span> <span class="n">can</span> <span class="n">still</span> <span class="n">use</span> <span class="n">this</span>
 <span class="n">option</span> <span class="n">to</span> <span class="n">manually</span> <span class="n">add</span> <span class="n">specific</span> <span class="n">invocation</span> <span class="n">triples</span><span class="o">.</span> <span class="n">Please</span> <span class="n">see</span>
@@ -597,16 +585,16 @@ colon, in option value.</p>
     <span class="ow">and</span> <span class="mi">4</span><span class="p">,</span> <span class="ow">and</span> <span class="n">fifth</span> <span class="ow">and</span> <span class="n">sixth</span> <span class="n">invocations</span> <span class="n">of</span> <span class="n">the</span> <span class="n">kernel</span>
 </pre></div>
 </div>
-<p>Use 0 for &#8220;non MPI application&#8221; and use 0 for &#8220;non OpenMP application&#8221;
+<p>Use 0 for “non MPI application” and use 0 for “non OpenMP application”
 in the first and second part of the syntax.</p>
 <p>[-e or - -exclude-ini]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">specify</span> <span class="n">paths</span> <span class="k">for</span> <span class="n">an</span> <span class="n">exclude</span> <span class="n">INI</span> <span class="n">file</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">specify</span> <span class="n">paths</span> <span class="k">for</span> <span class="n">an</span> <span class="n">exclude</span> <span class="n">INI</span> <span class="n">file</span>
 
 <span class="n">example</span><span class="p">)</span> <span class="o">--</span><span class="n">exclude</span> <span class="o">./</span><span class="n">exclude</span><span class="o">.</span><span class="n">ini</span>
 </pre></div>
 </div>
 <p>[- -kernel-option]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">compiler</span><span class="o">-</span><span class="n">specific</span> <span class="n">information</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">generating</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">compiler</span><span class="o">-</span><span class="n">specific</span> <span class="n">information</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">generating</span>
 <span class="n">Makefile</span> <span class="k">for</span> <span class="n">kernel</span><span class="o">.</span> <span class="n">Two</span> <span class="n">sub</span><span class="o">-</span><span class="n">options</span> <span class="n">are</span> <span class="n">defined</span> <span class="ow">in</span> <span class="n">this</span>
 <span class="n">version</span><span class="p">:</span> <span class="n">FC</span> <span class="ow">and</span> <span class="n">FC_FLAGS</span><span class="o">.</span> <span class="n">User</span> <span class="n">can</span> <span class="n">choose</span> <span class="n">which</span> <span class="n">Fortran</span>
 <span class="n">compiler</span> <span class="n">to</span> <span class="n">be</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">kernel</span> <span class="n">makefile</span> <span class="k">with</span> <span class="n">FC</span> <span class="n">flag</span><span class="o">.</span>
@@ -618,7 +606,7 @@ in the first and second part of the syntax.</p>
 </pre></div>
 </div>
 <p>[- -mpi]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">Turns</span> <span class="n">on</span> <span class="n">MPI</span> <span class="n">supports</span> <span class="ow">in</span> <span class="n">KGen</span><span class="o">.</span> <span class="n">There</span> <span class="n">are</span> <span class="n">several</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">Turns</span> <span class="n">on</span> <span class="n">MPI</span> <span class="n">supports</span> <span class="ow">in</span> <span class="n">KGen</span><span class="o">.</span> <span class="n">There</span> <span class="n">are</span> <span class="n">several</span>
 <span class="n">sub</span><span class="o">-</span><span class="n">options</span><span class="p">:</span> <span class="n">enable</span><span class="p">,</span> <span class="n">comm</span><span class="p">,</span> <span class="n">use</span><span class="p">,</span> <span class="ow">and</span> <span class="n">header</span><span class="o">.</span> <span class="n">enable</span> <span class="n">specifies</span>
 <span class="n">that</span> <span class="n">KGen</span> <span class="n">extracts</span> <span class="n">a</span> <span class="n">kernel</span> <span class="kn">from</span> <span class="nn">MPI</span> <span class="n">application</span><span class="o">.</span> <span class="n">This</span> <span class="ow">is</span>
 <span class="n">a</span> <span class="n">mandatory</span> <span class="k">for</span> <span class="n">MPI</span> <span class="n">application</span><span class="o">.</span> <span class="n">comm</span> <span class="n">specified</span> <span class="n">the</span> <span class="n">names</span>
@@ -632,7 +620,7 @@ in the first and second part of the syntax.</p>
 </pre></div>
 </div>
 <p>[- -openmp]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">Turns</span> <span class="n">on</span> <span class="n">OpenMP</span> <span class="n">supports</span> <span class="ow">in</span> <span class="n">KGen</span><span class="o">.</span> <span class="n">There</span> <span class="ow">is</span> <span class="n">two</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">Turns</span> <span class="n">on</span> <span class="n">OpenMP</span> <span class="n">supports</span> <span class="ow">in</span> <span class="n">KGen</span><span class="o">.</span> <span class="n">There</span> <span class="ow">is</span> <span class="n">two</span>
 <span class="n">sub</span><span class="o">-</span><span class="n">options</span><span class="p">:</span> <span class="s2">&quot;enable&quot;</span> <span class="ow">and</span> <span class="s2">&quot;kernel-in-critical-region&quot;</span><span class="o">.</span>
 <span class="s2">&quot;enable&quot;</span> <span class="n">specifies</span> <span class="n">that</span> <span class="n">KGen</span> <span class="n">extracts</span> <span class="n">a</span> <span class="n">kernel</span> <span class="kn">from</span>
 <span class="nn">OpenMP</span> <span class="n">application</span><span class="o">.</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">mandatory</span> <span class="k">for</span> <span class="n">OpenMP</span>
@@ -647,7 +635,7 @@ in the first and second part of the syntax.</p>
 </pre></div>
 </div>
 <p>[- -intrinsic]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">options</span> <span class="n">to</span> <span class="n">let</span> <span class="n">KGen</span> <span class="n">skip</span> <span class="n">searching</span> <span class="k">for</span> <span class="n">names</span> <span class="n">of</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">options</span> <span class="n">to</span> <span class="n">let</span> <span class="n">KGen</span> <span class="n">skip</span> <span class="n">searching</span> <span class="k">for</span> <span class="n">names</span> <span class="n">of</span>
 <span class="n">intrinsic</span><span class="o">-</span><span class="n">procedures</span><span class="o">.</span> <span class="n">At</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">one</span> <span class="n">of</span> <span class="n">skip</span> <span class="ow">or</span> <span class="n">noskip</span>
 <span class="n">should</span> <span class="n">be</span> <span class="n">provided</span><span class="o">.</span> <span class="n">With</span> <span class="k">except</span> <span class="n">sub</span><span class="o">-</span><span class="n">flag</span><span class="p">,</span> <span class="n">user</span> <span class="n">can</span> <span class="n">specify</span>
 <span class="n">which</span> <span class="n">namepath</span> <span class="n">should</span> <span class="n">be</span> <span class="n">considered</span> <span class="k">as</span> <span class="n">exception</span><span class="o">.</span>
@@ -658,7 +646,7 @@ in the first and second part of the syntax.</p>
 </pre></div>
 </div>
 <p>[- -verbose]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">This</span> <span class="n">flag</span> <span class="n">sets</span> <span class="n">the</span> <span class="n">initial</span> <span class="n">verbosity</span> <span class="n">level</span> <span class="ow">in</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">This</span> <span class="n">flag</span> <span class="n">sets</span> <span class="n">the</span> <span class="n">initial</span> <span class="n">verbosity</span> <span class="n">level</span> <span class="ow">in</span>
 <span class="n">the</span> <span class="n">generated</span> <span class="n">kernel</span><span class="o">.</span> <span class="n">Default</span> <span class="n">value</span> <span class="ow">is</span> <span class="mf">1.</span> <span class="n">User</span> <span class="n">can</span>
 <span class="n">modify</span> <span class="n">the</span> <span class="n">verbosity</span> <span class="n">level</span> <span class="n">by</span> <span class="n">changing</span> <span class="n">the</span> <span class="n">verbosity</span>
 <span class="n">value</span> <span class="n">up</span> <span class="n">to</span> <span class="mf">3.</span> <span class="n">User</span> <span class="n">also</span> <span class="n">can</span> <span class="n">modify</span> <span class="n">verbosity</span> <span class="n">level</span> <span class="n">by</span>
@@ -667,8 +655,8 @@ in the first and second part of the syntax.</p>
 <span class="n">example</span><span class="p">)</span> <span class="o">--</span><span class="n">verbose</span> <span class="mi">3</span>
 </pre></div>
 </div>
-<p>[&#8211;check]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">This</span> <span class="n">flag</span> <span class="n">provides</span> <span class="n">KGen</span> <span class="k">with</span> <span class="n">correctness</span>
+<p>[–check]</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">This</span> <span class="n">flag</span> <span class="n">provides</span> <span class="n">KGen</span> <span class="k">with</span> <span class="n">correctness</span>
 <span class="n">check</span><span class="o">-</span><span class="n">related</span> <span class="n">information</span><span class="o">.</span> <span class="n">Current</span> <span class="n">implementation</span> <span class="n">only</span>
 <span class="n">allows</span> <span class="n">perturbation</span> <span class="n">related</span> <span class="n">information</span><span class="o">.</span> <span class="n">pert_invar</span>
 <span class="n">sub</span><span class="o">-</span><span class="n">flag</span> <span class="n">select</span> <span class="n">an</span> <span class="nb">input</span> <span class="n">variable</span> <span class="k">for</span> <span class="n">perturbation</span> <span class="n">test</span><span class="o">.</span>
@@ -679,7 +667,7 @@ in the first and second part of the syntax.</p>
 </pre></div>
 </div>
 <p>[- -add-mpi-frame]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">This</span> <span class="n">flag</span> <span class="n">specify</span> <span class="n">to</span> <span class="n">create</span> <span class="n">MPI</span> <span class="n">framework</span> <span class="k">for</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span><span class="p">:</span> <span class="n">This</span> <span class="n">flag</span> <span class="n">specify</span> <span class="n">to</span> <span class="n">create</span> <span class="n">MPI</span> <span class="n">framework</span> <span class="k">for</span>
 <span class="n">replicating</span> <span class="n">kernel</span> <span class="n">execution</span> <span class="n">across</span> <span class="n">multiple</span> <span class="n">MPI</span>
 <span class="n">ranks</span><span class="o">.</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">simple</span> <span class="n">duplication</span> <span class="n">of</span> <span class="n">kernel</span> <span class="n">execution</span>
 <span class="n">without</span> <span class="n">having</span> <span class="nb">any</span> <span class="n">communication</span> <span class="n">among</span> <span class="n">kernels</span><span class="o">.</span>
@@ -691,7 +679,7 @@ in the first and second part of the syntax.</p>
 </pre></div>
 </div>
 <p>[- -source]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">this</span> <span class="n">options</span> <span class="n">specifies</span> <span class="n">information</span> <span class="n">related</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">this</span> <span class="n">options</span> <span class="n">specifies</span> <span class="n">information</span> <span class="n">related</span>
 <span class="n">to</span> <span class="n">source</span> <span class="n">file</span><span class="o">.</span> <span class="nb">format</span> <span class="n">sub</span><span class="o">-</span><span class="n">flag</span> <span class="n">specifies</span> <span class="n">the</span> <span class="n">Fortran</span>
 <span class="nb">format</span> <span class="n">of</span> <span class="n">source</span> <span class="n">files</span> <span class="n">fixed</span> <span class="ow">is</span> <span class="n">used</span> <span class="k">for</span> <span class="n">F77</span> <span class="nb">format</span>
 <span class="ow">and</span> <span class="n">free</span> <span class="n">used</span> <span class="k">for</span> <span class="n">F90</span> <span class="ow">and</span> <span class="n">later</span> <span class="nb">format</span><span class="o">.</span> <span class="n">With</span> <span class="n">this</span> <span class="n">sub</span><span class="o">-</span><span class="n">flag</span><span class="p">,</span>
@@ -705,8 +693,8 @@ in the first and second part of the syntax.</p>
 <span class="n">example</span><span class="p">)</span> <span class="o">--</span><span class="n">source</span> <span class="nb">format</span><span class="o">=</span><span class="n">free</span><span class="p">,</span><span class="n">strict</span><span class="o">=</span><span class="n">no</span><span class="p">,</span><span class="n">alias</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">A</span><span class="p">:</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">B</span>
 </pre></div>
 </div>
-<p>[&#8211;repr-etime]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">this</span> <span class="n">option</span> <span class="n">enables</span> <span class="n">to</span> <span class="n">measure</span> <span class="n">elapsed</span> <span class="n">time</span> <span class="n">of</span>
+<p>[–repr-etime]</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">this</span> <span class="n">option</span> <span class="n">enables</span> <span class="n">to</span> <span class="n">measure</span> <span class="n">elapsed</span> <span class="n">time</span> <span class="n">of</span>
 <span class="n">callsite</span> <span class="k">while</span> <span class="n">running</span> <span class="n">original</span> <span class="n">application</span><span class="o">.</span> <span class="n">KGen</span> <span class="n">uses</span>
 <span class="n">the</span> <span class="n">measruments</span> <span class="n">to</span> <span class="n">automatically</span> <span class="n">generate</span> <span class="n">invocation</span>
 <span class="n">triplets</span><span class="o">.</span> <span class="n">This</span> <span class="n">option</span> <span class="n">can</span> <span class="n">be</span> <span class="n">used</span> <span class="k">with</span> <span class="n">other</span> <span class="s2">&quot;repr-&quot;</span>
@@ -735,7 +723,7 @@ in the first and second part of the syntax.</p>
 </pre></div>
 </div>
 <p>[- -repr-papi]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">this</span> <span class="n">option</span> <span class="n">enables</span> <span class="n">to</span> <span class="n">measure</span> <span class="n">a</span> <span class="n">PAPI</span> <span class="n">counter</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">this</span> <span class="n">option</span> <span class="n">enables</span> <span class="n">to</span> <span class="n">measure</span> <span class="n">a</span> <span class="n">PAPI</span> <span class="n">counter</span>
 <span class="n">of</span> <span class="n">callsite</span> <span class="k">while</span> <span class="n">running</span> <span class="n">original</span> <span class="n">application</span><span class="o">.</span> <span class="n">KGen</span> <span class="n">uses</span>
 <span class="n">the</span> <span class="n">measruments</span> <span class="n">to</span> <span class="n">automatically</span> <span class="n">generate</span> <span class="n">invocation</span>
 <span class="n">triplets</span><span class="o">.</span> <span class="n">This</span> <span class="n">option</span> <span class="n">can</span> <span class="n">be</span> <span class="n">used</span> <span class="k">with</span> <span class="n">other</span> <span class="s2">&quot;repr-&quot;</span>
@@ -768,7 +756,7 @@ in the first and second part of the syntax.</p>
 </pre></div>
 </div>
 <p>[- -repr-code]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">this</span> <span class="n">option</span> <span class="n">enables</span> <span class="n">to</span> <span class="n">measure</span> <span class="n">source</span> <span class="n">code</span> <span class="n">coverage</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">this</span> <span class="n">option</span> <span class="n">enables</span> <span class="n">to</span> <span class="n">measure</span> <span class="n">source</span> <span class="n">code</span> <span class="n">coverage</span>
 <span class="n">of</span> <span class="n">kernel</span> <span class="k">while</span> <span class="n">running</span> <span class="n">original</span> <span class="n">application</span> <span class="ow">and</span> <span class="n">produces</span>
 <span class="n">summary</span> <span class="n">of</span> <span class="n">coverage</span> <span class="n">information</span><span class="o">.</span> <span class="n">KGen</span> <span class="n">uses</span> <span class="n">the</span> <span class="n">measruments</span>
 <span class="n">to</span> <span class="n">automatically</span> <span class="n">generate</span> <span class="n">invocation</span> <span class="n">triplets</span><span class="o">.</span> <span class="n">This</span> <span class="n">option</span> <span class="n">can</span>
@@ -785,25 +773,6 @@ in the first and second part of the syntax.</p>
 <span class="n">example</span><span class="p">)</span> <span class="o">--</span><span class="nb">repr</span><span class="o">-</span><span class="n">code</span> <span class="n">percentage</span><span class="o">=</span><span class="mi">99</span>
 </pre></div>
 </div>
-<p>[- -state-switch]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">this</span> <span class="n">option</span> <span class="n">controls</span> <span class="n">state</span> <span class="n">generation</span> <span class="n">task</span><span class="o">.</span> <span class="n">There</span> <span class="n">are</span>
-    <span class="n">three</span> <span class="n">sub</span><span class="o">-</span><span class="n">options</span><span class="p">:</span> <span class="n">clean</span><span class="p">,</span> <span class="nb">type</span> <span class="ow">and</span> <span class="n">directory</span><span class="o">.</span> <span class="s2">&quot;clean&quot;</span> <span class="n">forces</span> <span class="n">to</span>
-<span class="n">remove</span> <span class="n">previously</span> <span class="n">generated</span> <span class="n">ouputs</span><span class="o">.</span> <span class="n">In</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="n">there</span> <span class="n">are</span> <span class="n">two</span>
-<span class="n">attributes</span><span class="p">:</span> <span class="n">replace</span> <span class="ow">or</span> <span class="n">copy</span><span class="o">.</span> <span class="s2">&quot;replace&quot;</span> <span class="n">forces</span> <span class="n">the</span> <span class="n">original</span> <span class="n">source</span>
-    <span class="n">file</span> <span class="ow">is</span> <span class="n">replaced</span> <span class="k">with</span> <span class="n">the</span> <span class="n">KGen</span><span class="o">-</span><span class="n">generated</span> <span class="n">source</span> <span class="n">file</span><span class="o">.</span> <span class="s2">&quot;copy&quot;</span>
-    <span class="n">forces</span> <span class="n">to</span> <span class="n">copy</span> <span class="n">KGen</span><span class="o">-</span><span class="n">generated</span> <span class="n">source</span> <span class="n">files</span> <span class="n">into</span> <span class="n">a</span> <span class="n">directory</span> <span class="n">that</span>
-<span class="ow">is</span> <span class="n">specified</span> <span class="n">by</span> <span class="s2">&quot;directory&quot;</span> <span class="n">sub</span><span class="o">-</span><span class="n">option</span> <span class="n">of</span> <span class="s2">&quot;--state-switch&quot;</span> <span class="n">option</span><span class="o">.</span>
-    <span class="n">default</span> <span class="n">sub</span><span class="o">-</span><span class="n">option</span> <span class="ow">is</span> <span class="s2">&quot;replace&quot;</span><span class="o">.</span>
-
-<span class="n">example</span><span class="p">)</span> <span class="o">--</span><span class="n">state</span><span class="o">-</span><span class="n">switch</span> <span class="n">clean</span><span class="o">=</span><span class="s2">&quot;rm ./strace.log&quot;</span>
-</pre></div>
-</div>
-<p>[- -noreuse-rawdata]</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="p">:</span> <span class="n">Use</span> <span class="n">this</span> <span class="n">option</span> <span class="k">if</span> <span class="n">re</span><span class="o">-</span><span class="n">generating</span> <span class="n">raw</span> <span class="n">data</span> <span class="ow">is</span> <span class="n">desired</span><span class="o">.</span>
-
-<span class="n">example</span><span class="p">)</span> <span class="o">--</span><span class="n">noreuse</span><span class="o">-</span><span class="n">rawdata</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="known-issues">
 <h2>5. Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
@@ -818,9 +787,9 @@ Pointer variable that is associated with part of input state to the kernel may (
 <div class="section" id="user-interface">
 <h3>6.1 User Interface<a class="headerlink" href="#user-interface" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>&#8220;&#8211;invocation&#8221; option is changed from mandatory to optional</li>
-<li>&#8220;&#8211;repr-etime&#8221;, &#8220;&#8211;repr-papi&#8221;, and &#8220;&#8211;repr-code&#8221; options are added for representative extensions</li>
-<li>&#8220;&#8211;state-clean&#8221;, &#8220;&#8211;state-build&#8221;, and &#8220;&#8211;state-run&#8221; options are discarded.</li>
+<li>“–invocation” option is changed from mandatory to optional</li>
+<li>“–repr-etime”, “–repr-papi”, and “–repr-code” options are added for representative extensions</li>
+<li>“–state-clean”, “–state-build”, and “–state-run” options are discarded.</li>
 </ul>
 </div>
 <div class="section" id="major-improvements">
@@ -850,8 +819,8 @@ Pointer variable that is associated with part of input state to the kernel may (
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, KGen Developers.
-      Last updated on Jul 31, 2018.
+        &copy; Copyright 2017, KGen Developers
+      Last updated on Oct 10, 2018.
 
     </p>
   </div>
@@ -870,21 +839,14 @@ Pointer variable that is associated with part of input state to the kernel may (
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.8.0',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  false,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    
 
   
 

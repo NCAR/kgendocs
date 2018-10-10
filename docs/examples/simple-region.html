@@ -100,7 +100,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#kgen-command-to-generate-a-kernel">KGen command to generate a kernel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#running-a-kernel">Running a kernel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-representative-feature">Using Representative Feature</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#what-s-next">What&#8217;s next</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-s-next">What’s next</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="simple-MPI.html">Simple MPI Example</a></li>
@@ -178,7 +178,7 @@ This example can be found at $KGEN_HOME/examples/simple-region of KGen distribut
 <h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
 <p>If you have not installed KGen, please see <a class="reference internal" href="../getting-started.html"><span class="doc">Getting-started</span></a>.</p>
 <p>Following Linux utilities are required to use KGen.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">make</span>      <span class="p">:</span> <span class="n">Software</span> <span class="n">builder</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">make</span>      <span class="p">:</span> <span class="n">Software</span> <span class="n">builder</span>
 <span class="o">-</span> <span class="n">cpp</span>       <span class="p">:</span> <span class="n">C</span> <span class="n">preprocessor</span>
 <span class="o">-</span> <span class="n">strace</span>    <span class="p">:</span> <span class="n">System</span> <span class="n">call</span> <span class="n">tracer</span>
 </pre></div>
@@ -187,7 +187,7 @@ This example can be found at $KGEN_HOME/examples/simple-region of KGen distribut
 <div class="section" id="files-in-the-example">
 <h2>Files in the example<a class="headerlink" href="#files-in-the-example" title="Permalink to this headline">¶</a></h2>
 <p>Following tree explains the files in this example.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$KGEN_HOME/examples/simple-region
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$KGEN_HOME/examples/simple-region
 |
 |-- Makefile            : contains KGen command to generate a KGen kernel
 |-- README              : an introduction of the example
@@ -201,8 +201,8 @@ This example can be found at $KGEN_HOME/examples/simple-region of KGen distribut
 </div>
 <div class="section" id="kgen-command-to-generate-a-kernel">
 <h2>KGen command to generate a kernel<a class="headerlink" href="#kgen-command-to-generate-a-kernel" title="Permalink to this headline">¶</a></h2>
-<p>When user runs &#8220;make&#8221; command in top directory of the example, following KGen command is executed.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$KGEN_HOME/bin/kgen \
+<p>When user runs “make” command in top directory of the example, following KGen command is executed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$KGEN_HOME/bin/kgen \
     --cmd-clean &quot;cd src; make clean&quot; \
     --cmd-build &quot;cd src; make build&quot; \
     --cmd-run &quot;cd src; make run&quot; \
@@ -210,9 +210,9 @@ This example can be found at $KGEN_HOME/examples/simple-region of KGen distribut
 </pre></div>
 </div>
 <p><strong>NOTE</strong>: Several KGen options shown in the example of KGen distribution are omitted. The options are explained below.</p>
-<p>First three options in the command let KGen know how to <strong>&#8220;clean/build/run&#8221;</strong> the target software. The commands in this options can be any Linux command including ones from other complex building system such as CMake or GNU Automake. <strong>&#8220;clean&#8221;</strong> command is to make sure that all the source files required for KGen analysis will be actually compiled. <strong>&#8220;build&#8221;</strong> command is to build the software so that KGen collect CPP macros and file paths automatically. <strong>&#8220;run&#8221;</strong> command is to run the software that is built with KGen-instrumented source files so that KGen can automatically generate state input/output data that are used for kernel execution and verification. Please see <a class="reference internal" href="../user-guide.html"><span class="doc">User guide</span></a> for more details.</p>
+<p>First three options in the command let KGen know how to <strong>“clean/build/run”</strong> the target software. The commands in this options can be any Linux command including ones from other complex building system such as CMake or GNU Automake. <strong>“clean”</strong> command is to make sure that all the source files required for KGen analysis will be actually compiled. <strong>“build”</strong> command is to build the software so that KGen collect CPP macros and file paths automatically. <strong>“run”</strong> command is to run the software that is built with KGen-instrumented source files so that KGen can automatically generate state input/output data that are used for kernel execution and verification. Please see <a class="reference internal" href="../user-guide.html"><span class="doc">User guide</span></a> for more details.</p>
 <p>The last line of the KGen command is a path to a source file that contains KGen directives. The KGen directives marks the region of source code for kernel generation. Following code shows how to use the directives.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>MODULE update_mod
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>MODULE update_mod
     USE calc_mod, only : calc
     PUBLIC update
 CONTAINS
@@ -231,12 +231,12 @@ CONTAINS
 END MODULE
 </pre></div>
 </div>
-<p>The usage of KGen directives is similar to OpenMP directives. It starts with !$kgen followed by directive name and clauses. In this case, two directives, &#8220;begin_callsite&#8221; and &#8220;end_callsite&#8221;, are used to mark a region as a callsite block. Please see <a class="reference internal" href="../user-guide.html"><span class="doc">User guide</span></a> for more details on specifying callsite with other methods.</p>
+<p>The usage of KGen directives is similar to OpenMP directives. It starts with !$kgen followed by directive name and clauses. In this case, two directives, “begin_callsite” and “end_callsite”, are used to mark a region as a callsite block. Please see <a class="reference internal" href="../user-guide.html"><span class="doc">User guide</span></a> for more details on specifying callsite with other methods.</p>
 </div>
 <div class="section" id="running-a-kernel">
 <h2>Running a kernel<a class="headerlink" href="#running-a-kernel" title="Permalink to this headline">¶</a></h2>
 <p>Once a kernel is generated successfully, a kernel can be executed immediately as following.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="o">&gt;&gt;&gt;</span> <span class="n">cd</span> <span class="n">kernel</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">&gt;&gt;&gt;</span> <span class="n">cd</span> <span class="n">kernel</span>
  <span class="o">&gt;&gt;&gt;</span> <span class="n">make</span>
 
     <span class="n">ifort</span>  <span class="o">-</span><span class="n">c</span> <span class="o">-</span><span class="n">o</span> <span class="n">kgen_utils</span><span class="o">.</span><span class="n">o</span> <span class="n">kgen_utils</span><span class="o">.</span><span class="n">f90</span>
@@ -280,7 +280,7 @@ END MODULE
 <span class="o">****************************************************</span>
 </pre></div>
 </div>
-<p>KGen generates kernel source files and utility files in &#8220;kernel&#8221; subdirectory. &#8220;Makefile&#8221; in the directory helps user to build/run the kernel conviniently.
+<p>KGen generates kernel source files and utility files in “kernel” subdirectory. “Makefile” in the directory helps user to build/run the kernel conviniently.
 All KGen-generated kernels verify its output against state data generated from original software execution and provide verification results with detail information.</p>
 </div>
 <div class="section" id="using-representative-feature">
@@ -288,24 +288,24 @@ All KGen-generated kernels verify its output against state data generated from o
 <p>From KGen Version 0.8.0, KGen supports three representative features.</p>
 <p>Elapsedtime-based representative feature is one of them. The other two are: PAPI counter-based and source-code converage-based.</p>
 <p>To turn on the feature, following KGen command-line flags is used.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="nb">repr</span><span class="o">-</span><span class="n">etime</span> <span class="n">enable</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="nb">repr</span><span class="o">-</span><span class="n">etime</span> <span class="n">enable</span>
 </pre></div>
 </div>
-<p>With this option, KGen generate 20 (default) data files that can best represent the elapsed time characteristics of original application. &#8220;ndata&#8221; sub-flag can be used to change the default number of data files.</p>
+<p>With this option, KGen generate 20 (default) data files that can best represent the elapsed time characteristics of original application. “ndata” sub-flag can be used to change the default number of data files.</p>
 <p>Similarly, user can use source code coverage representative feature as following:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="nb">repr</span><span class="o">-</span><span class="n">code</span> <span class="n">enable</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="nb">repr</span><span class="o">-</span><span class="n">code</span> <span class="n">enable</span>
 </pre></div>
 </div>
-<p>Once completed, KGen will create a new directory of &#8220;coverage&#8221; in output directory. In &#8220;coverage&#8221; directory, KGen creates source file(s) with &#8220;coverage&#8221; extension that contains &#8220;visit&#8221; information per each IF construct blocks.</p>
+<p>Once completed, KGen will create a new directory of “coverage” in output directory. In “coverage” directory, KGen creates source file(s) with “coverage” extension that contains “visit” information per each IF construct blocks.</p>
 <p>Finally, PAPI-based representative feature is used as following:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>--repr-papi header=${PAPI_DIR}/include/f90papi.h,
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>--repr-papi header=${PAPI_DIR}/include/f90papi.h,
    static=${PAPI_DIR}/lib/libpapi.a,event=PAPI_TOT_INS
 </pre></div>
 </div>
 <p>PAPI_DIR is used to specify the location of papi library. You may try a papi counter other than PAPI_TOT_INS such as PAPI_TOT_CYC.
 To use PAPI representative feature, you need to modify Makefile in src directory to build the example with PAPI library.</p>
 <p>Once a kernel is generated successfully, a kernel can be executed immediately as following.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="o">&gt;&gt;&gt;</span> <span class="n">cd</span> <span class="n">kernel</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">&gt;&gt;&gt;</span> <span class="n">cd</span> <span class="n">kernel</span>
  <span class="o">&gt;&gt;&gt;</span> <span class="n">make</span> <span class="n">papi</span>
 
     <span class="o">...</span>
@@ -346,7 +346,7 @@ To use PAPI representative feature, you need to modify Makefile in src directory
 </div>
 </div>
 <div class="section" id="what-s-next">
-<h2>What&#8217;s next<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
+<h2>What’s next<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="simple-MPI.html"><span class="doc">An exmaple for MPI application</span></a></p>
 </div>
 </div>
@@ -371,8 +371,8 @@ To use PAPI representative feature, you need to modify Makefile in src directory
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, KGen Developers.
-      Last updated on Jul 31, 2018.
+        &copy; Copyright 2017, KGen Developers
+      Last updated on Oct 10, 2018.
 
     </p>
   </div>
@@ -391,21 +391,14 @@ To use PAPI representative feature, you need to modify Makefile in src directory
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'0.8.0',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  false,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    
 
   
 

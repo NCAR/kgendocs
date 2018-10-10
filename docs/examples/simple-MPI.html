@@ -99,7 +99,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#files-in-the-example">Files in the example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#kgen-command-to-generate-a-kernel">KGen command to generate a kernel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#running-a-kernel">Running a kernel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#what-s-next">What&#8217;s next</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-s-next">What’s next</a></li>
 </ul>
 </li>
 </ul>
@@ -176,7 +176,7 @@ This example can be found at $KGEN_HOME/examples/simple-MPI of KGen distribution
 <h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
 <p>If you have not installed KGen, please see <a class="reference internal" href="../getting-started.html"><span class="doc">Getting-started</span></a>.</p>
 <p>Following Linux utilities are required to use KGen.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">make</span>      <span class="p">:</span> <span class="n">Software</span> <span class="n">builder</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">make</span>      <span class="p">:</span> <span class="n">Software</span> <span class="n">builder</span>
 <span class="o">-</span> <span class="n">cpp</span>       <span class="p">:</span> <span class="n">C</span> <span class="n">preprocessor</span>
 <span class="o">-</span> <span class="n">strace</span>    <span class="p">:</span> <span class="n">System</span> <span class="n">call</span> <span class="n">tracer</span>
 </pre></div>
@@ -185,7 +185,7 @@ This example can be found at $KGEN_HOME/examples/simple-MPI of KGen distribution
 <div class="section" id="files-in-the-example">
 <h2>Files in the example<a class="headerlink" href="#files-in-the-example" title="Permalink to this headline">¶</a></h2>
 <p>Following tree explains the files in this example.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$KGEN_HOME/examples/simple-region
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$KGEN_HOME/examples/simple-region
 |
 |-- Makefile            : contains KGen command to generate a KGen kernel
 |-- README              : an introduction of the example
@@ -201,8 +201,8 @@ This example can be found at $KGEN_HOME/examples/simple-MPI of KGen distribution
 </div>
 <div class="section" id="kgen-command-to-generate-a-kernel">
 <h2>KGen command to generate a kernel<a class="headerlink" href="#kgen-command-to-generate-a-kernel" title="Permalink to this headline">¶</a></h2>
-<p>When user runs &#8220;make&#8221; command in top directory of the example, following KGen command is executed.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$KGEN_HOME/bin/kgen \
+<p>When user runs “make” command in top directory of the example, following KGen command is executed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$KGEN_HOME/bin/kgen \
     --cmd-clean &quot;cd src; make -f Makefile.mpirun clean&quot; \
     --cmd-build &quot;cd src; make -f Makefile.mpirun build&quot; \
     --cmd-run &quot;cd src; make -f Makefile.mpirun run&quot; \
@@ -210,9 +210,9 @@ This example can be found at $KGEN_HOME/examples/simple-MPI of KGen distribution
 </pre></div>
 </div>
 <p><strong>NOTE</strong>: Several KGen options shown in the example of KGen distribution are omitted. The options are explained below.</p>
-<p>First three options in the command let KGen know how to <strong>&#8220;clean/build/run&#8221;</strong> the target software. The commands in this options can be any Linux command including ones from other complex building system such as CMake or GNU Automake. <strong>&#8220;clean&#8221;</strong> command is to make sure that all the source files required for KGen analysis will be actually compiled. <strong>&#8220;build&#8221;</strong> command is to build the software so that KGen collect CPP macros and file paths automatically. <strong>&#8220;run&#8221;</strong> command is to run the software that is built with KGen-instrumented source files so that KGen can automatically generate state input/output data that are used for kernel execution and verification. Please see <a class="reference internal" href="../user-guide.html"><span class="doc">User guide</span></a> for more details.</p>
-<p>The last line of the KGen command is a path to a source file and KGen &#8220;namepath&#8221;. KGen namepath is generally composed of module name, subprogram name and call target name. For example, in this example namepath to a callsite is &#8220;update_mod:update:calc&#8221;. Please see <a class="reference internal" href="../user-guide.html"><span class="doc">User guide</span></a> for more details.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>MODULE update_mod
+<p>First three options in the command let KGen know how to <strong>“clean/build/run”</strong> the target software. The commands in this options can be any Linux command including ones from other complex building system such as CMake or GNU Automake. <strong>“clean”</strong> command is to make sure that all the source files required for KGen analysis will be actually compiled. <strong>“build”</strong> command is to build the software so that KGen collect CPP macros and file paths automatically. <strong>“run”</strong> command is to run the software that is built with KGen-instrumented source files so that KGen can automatically generate state input/output data that are used for kernel execution and verification. Please see <a class="reference internal" href="../user-guide.html"><span class="doc">User guide</span></a> for more details.</p>
+<p>The last line of the KGen command is a path to a source file and KGen “namepath”. KGen namepath is generally composed of module name, subprogram name and call target name. For example, in this example namepath to a callsite is “update_mod:update:calc”. Please see <a class="reference internal" href="../user-guide.html"><span class="doc">User guide</span></a> for more details.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>MODULE update_mod
     USE calc_mod, only : calc
     PUBLIC update
 CONTAINS
@@ -230,7 +230,7 @@ END MODULE
 </pre></div>
 </div>
 <p>Other options in the example of KGen distribution are explained below.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">timing</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">100</span>                  <span class="p">:</span> <span class="n">repeats</span> <span class="n">kernel</span> <span class="n">execution</span> <span class="mi">100</span> <span class="n">times</span> <span class="n">to</span> <span class="n">increase</span> <span class="n">timing</span> <span class="n">measurment</span> <span class="n">resolution</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">timing</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">100</span>                  <span class="p">:</span> <span class="n">repeats</span> <span class="n">kernel</span> <span class="n">execution</span> <span class="mi">100</span> <span class="n">times</span> <span class="n">to</span> <span class="n">increase</span> <span class="n">timing</span> <span class="n">measurment</span> <span class="n">resolution</span>
 <span class="o">--</span><span class="n">invocation</span> <span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span> <span class="p">:</span> <span class="n">generates</span> <span class="n">state</span> <span class="n">data</span> <span class="kn">from</span> <span class="nn">first</span> <span class="ow">and</span> <span class="n">third</span> <span class="n">invocations</span> <span class="n">of</span> <span class="n">MPI</span> <span class="n">rank</span> <span class="mi">0</span> <span class="ow">and</span> <span class="mi">1</span>
 <span class="o">--</span><span class="n">check</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1.0</span><span class="n">D</span><span class="o">-</span><span class="mi">14</span>            <span class="p">:</span> <span class="n">generates</span> <span class="n">failed</span> <span class="n">verification</span> <span class="k">if</span> <span class="n">kernel</span> <span class="n">output</span> <span class="ow">is</span> <span class="n">different</span> <span class="n">more</span> <span class="n">than</span> <span class="mf">1.0</span><span class="n">D</span><span class="o">-</span><span class="mi">14</span>
 <span class="o">--</span><span class="n">rebuild</span> <span class="nb">all</span>                        <span class="p">:</span> <span class="n">prevents</span> <span class="n">using</span> <span class="n">cached</span> <span class="n">information</span> <span class="kn">from</span> <span class="nn">previous</span> <span class="n">kernel</span> <span class="n">generation</span>
@@ -240,7 +240,7 @@ END MODULE
 <div class="section" id="running-a-kernel">
 <h2>Running a kernel<a class="headerlink" href="#running-a-kernel" title="Permalink to this headline">¶</a></h2>
 <p>Once a kernel is generated successfully, a kernel can be executed immediately as following.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cd</span> <span class="n">kernel</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cd</span> <span class="n">kernel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">make</span>
 
 <span class="go">   ifort  -c -o kgen_utils.o kgen_utils.f90</span>
@@ -288,11 +288,11 @@ END MODULE
 <span class="go">   ****************************************************</span>
 </pre></div>
 </div>
-<p>KGen generates kernel source files and utility files in &#8220;kernel&#8221; subdirectory. &#8220;Makefile&#8221; in the directory helps user to build/run the kernel conviniently.
+<p>KGen generates kernel source files and utility files in “kernel” subdirectory. “Makefile” in the directory helps user to build/run the kernel conviniently.
 All KGen-generated kernels verify its output against state data generated from original software execution and provide verification results with detail information.</p>
 </div>
 <div class="section" id="what-s-next">
-<h2>What&#8217;s next<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
+<h2>What’s next<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="../user-guide.html"><span class="doc">User guide</span></a></p>
 </div>
 </div>
@@ -315,8 +315,8 @@ All KGen-generated kernels verify its output against state data generated from o
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, KGen Developers.
-      Last updated on Jul 31, 2018.
+        &copy; Copyright 2017, KGen Developers
+      Last updated on Oct 10, 2018.
 
     </p>
   </div>
@@ -335,21 +335,14 @@ All KGen-generated kernels verify its output against state data generated from o
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'0.8.0',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  false,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    
 
   
 
